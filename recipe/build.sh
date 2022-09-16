@@ -27,8 +27,6 @@ fi
   cargo bundle-licenses --format yaml --output CI.THIRDPARTY.yml --previous THIRDPARTY.yml --check-previous
 )
 
-export RUSTFLAGS=$CARGO_BUILD_RUSTFLAGS
-
 # build statically linked binary with Rust
 cargo install --verbose --locked --root "$PREFIX" --path .
 
