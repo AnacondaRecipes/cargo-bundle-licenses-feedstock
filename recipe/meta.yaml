@@ -36,6 +36,8 @@ about:
   license_family: MIT
   license_file: LICENSE-MIT
   summary: Bundle thirdparty licenses for Cargo projects into a single file.
+  dev_url: https://github.com/sstadick/cargo-bundle-licenses
+  doc_url: https://github.com/sstadick/cargo-bundle-licenses
 
 extra:
   recipe-maintainers:
