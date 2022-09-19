@@ -32,7 +32,7 @@ test:
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
-  license: MIT
+  license: MIT and Apache-2.0
   license_family: MIT
   license_file: LICENSE-MIT
   summary: Bundle thirdparty licenses for Cargo projects into a single file.
