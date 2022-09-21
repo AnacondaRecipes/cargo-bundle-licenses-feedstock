@@ -6,12 +6,6 @@ export CARGO_HOME=${CONDA_PREFIX}/.cargo.$(uname)
 export CARGO_CONFIG=${CARGO_HOME}/config
 export RUSTUP_HOME=${CARGO_HOME}/rustup
 
-
-if [[ "$c_compiler" == "clang" ]]; then
-  echo "-L$BUILD_PREFIX/lib -Wl,-rpath,$BUILD_PREFIX/lib" > $BUILD_PREFIX/bin/$BUILD.cfg
-  echo "-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" > $BUILD_PREFIX/bin/$HOST.cfg
-fi
-
 # build statically linked binary with Rust
 cargo install --verbose --locked --root "$PREFIX" --path .
 
