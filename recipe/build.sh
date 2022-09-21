@@ -2,8 +2,10 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CARGO_HOME="$BUILD_PREFIX/cargo"
-mkdir $CARGO_HOME
+export CARGO_HOME=${CONDA_PREFIX}/.cargo.$(uname)
+export CARGO_CONFIG=${CARGO_HOME}/config
+export RUSTUP_HOME=${CARGO_HOME}/rustup
+
 
 if [[ "$c_compiler" == "clang" ]]; then
   echo "-L$BUILD_PREFIX/lib -Wl,-rpath,$BUILD_PREFIX/lib" > $BUILD_PREFIX/bin/$BUILD.cfg
