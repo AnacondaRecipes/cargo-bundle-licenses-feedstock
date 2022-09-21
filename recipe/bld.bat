@@ -1,6 +1,7 @@
 :: Install cargo-license
-set CARGO_HOME=%BUILD_PREFIX%\cargo
-mkdir %CARGO_HOME%
+set CARGO_HOME=%CONDA_PREFIX%\.cargo.win
+set CARGO_CONFIG=%CARGO_HOME%\config
+set RUSTUP_HOME=%CARGO_HOME%\rustup
 icacls %CARGO_HOME% /grant Users:F
 :: Needed to bootstrap istelf into the conda ecosystem
 cargo install cargo-bundle-licenses
