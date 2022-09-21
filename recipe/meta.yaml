@@ -20,7 +20,8 @@ requirements:
     - {{ compiler('c') }}  # [not win]
     - {{ compiler('m2w64_c') }}  # [win]
     - pkg-config
-    - make
+    - make  # [not win]
+    - m2-make # [win]
     - cmake
     - libgit2
 
