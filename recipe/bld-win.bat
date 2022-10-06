@@ -5,6 +5,13 @@ set CARGO_CONFIG=%CARGO_HOME%\config
 set RUSTUP_HOME=%CARGO_HOME%\rustup
 icacls %CARGO_HOME% /grant Users:F
 
+echo "Building %PKG_NAME%"
+
+:: Set up a temporary directory so that msvc and gnu
+:: versions are not installed into the same directory
+md %CD%\build-%PKG_NAME%
+set TEMP=%CD%\build-%PKG_NAME%
+
 :: Needed to bootstrap istelf into the conda ecosystem
 cargo install cargo-bundle-licenses
 :: Check that all downstream libraries licenses are present
