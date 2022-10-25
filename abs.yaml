@@ -1,6 +1,7 @@
 aggregate_check: false
 
 channels:
+  - services-build-deps
   - services
 
 upload_channels:
