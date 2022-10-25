@@ -19,8 +19,9 @@ requirements:
     - {{ compiler('c') }}  # [not win]
     - {{ compiler('m2w64_c') }}  # [win]
     - pkg-config
-    - make
-    - cmake
+    #- make # [not win]
+    #- ninja # [win
+    #- cmake
     - zlib
   run:
     - libiconv
