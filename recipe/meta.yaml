@@ -21,11 +21,9 @@ requirements:
     - pkg-config
     - make
     - cmake
-    - libgit2
     - zlib
-  host:
-    - libgit2
-    - zlib
+  run:
+    - libiconv
 
 test:
   commands:
@@ -36,6 +34,11 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE-MIT
+  license_url: https://raw.githubusercontent.com/sstadick/cargo-bundle-licenses/main/LICENSE-MIT
+  dev_url: https://github.com/sstadick/cargo-bundle-licenses
+  description: "Bundle all third-party licenses into a single file."
+  doc_source_url: https://github.com/sstadick/cargo-bundle-licenses
+  doc_url: https://github.com/sstadick/cargo-bundle-licenses
   summary: Bundle thirdparty licenses for Cargo projects into a single file.
 
 extra:
