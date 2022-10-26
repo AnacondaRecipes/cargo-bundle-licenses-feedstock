@@ -23,6 +23,8 @@ requirements:
     #- ninja # [win
     #- cmake
     - zlib
+  host:
+    - zlib
   run:
     - libiconv
 
