@@ -1,6 +1,8 @@
+aggregate_check: false
+
+upload_channels:
+  - services
+
 channels:
-  - anaconda-server
-build_parameters:
-  - "--suppress-variables"
-  - "--error-overlinking"
-  - "--error-overdepending"
+  - services
+
