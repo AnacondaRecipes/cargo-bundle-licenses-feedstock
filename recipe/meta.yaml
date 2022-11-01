@@ -58,6 +58,7 @@ about:
   description: A rust tool to bundle all third-party licenses into a single file.
   dev_url: https://github.com/sstadick/cargo-bundle-licenses
   doc_url: https://github.com/sstadick/cargo-bundle-licenses
+  doc_source_url: https://github.com/sstadick/cargo-bundle-licenses/blob/v{{ version }}/README.md
 
 extra:
   recipe-maintainers:
