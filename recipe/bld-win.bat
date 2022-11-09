@@ -1,7 +1,17 @@
 :: Install cargo-license
-set CARGO_HOME=%BUILD_PREFIX%\cargo
-mkdir %CARGO_HOME%
+:: Set up rust environment
+set CARGO_HOME=%CONDA_PREFIX%\.cargo.win
+set CARGO_CONFIG=%CARGO_HOME%\config
+set RUSTUP_HOME=%CARGO_HOME%\rustup
 icacls %CARGO_HOME% /grant Users:F
+
+echo "Building %PKG_NAME%"
+
+:: Set up a temporary directory so that msvc and gnu
+:: versions are not installed into the same directory
+md %CD%\build-%PKG_NAME%
+set TEMP=%CD%\build-%PKG_NAME%
+
 :: Needed to bootstrap istelf into the conda ecosystem
 cargo install cargo-bundle-licenses
 :: Check that all downstream libraries licenses are present

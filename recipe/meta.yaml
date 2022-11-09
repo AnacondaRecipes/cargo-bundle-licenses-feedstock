@@ -1,8 +1,9 @@
-{% set version = "0.4.0" %}
-{% set sha256 = "0f19406cbf9e7ad68b68e5738c218c3395986648e5b60cf97cd52e732e82590c" %}
+{% set name = "cargo-bundle-licenses" %}
+{% set version = "0.5.0" %}
+{% set sha256 = "c2c746cb46ed43ed06a34b961a8d71fc86387fd68103d42e34043e80d0fb3a30" %}
 
 package:
-  name: cargo-bundle-licenses
+  name: {{ name }}-suite
   version: {{ version }}
 
 source:
@@ -10,32 +11,54 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
-
-requirements:
-  build:
-    - {{ compiler('rust') }}
-    - {{ compiler('c') }}  # [not win]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - pkg-config
-    - make
-    - cmake
+  number: 0
+  ignore_run_exports:
     - libgit2
-    - zlib
-  host:
-    - libgit2
-    - zlib
+  missing_dso_whitelist:
+    - $RPATH/ld64.so.1  # [s390x]
 
-test:
-  commands:
-    - cargo-bundle-licenses --help
+outputs:
+  - name: {{ name }}
+    script: build-unix.sh  # [not win]
+    script: bld-win.bat  # [win]
+    requirements:
+      build:
+        - rust_win-64  # [win]
+        - {{ compiler('m2w64_c') }} # [win]
+        - {{ compiler('rust') }}  # [not win]
+        - {{ compiler('c') }} # [not win]
+        - pkg-config
+        - make  # [not win]
+        - m2-make # [win]
+        - cmake
+        - libgit2
+      test:
+        commands:
+          - cargo-bundle-licenses --help
+  - name: {{ name }}-gnu                    # [win]
+    script: bld-win.bat                     # [win]
+    requirements:                           # [win]
+      build:                                # [win]
+        - rust-gnu_win-64                   # [win]
+        - {{ compiler('m2w64_c') }}         # [win]
+        - pkg-config                        # [win]
+        - m2-make                           # [win]
+        - cmake                             # [win]
+        - libgit2                           # [win]
+      test:                                 # [win]
+        commands:                           # [win]
+          - cargo-bundle-licenses --help    # [win]
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
-  license: MIT
+  license: MIT and Apache-2.0
   license_family: MIT
   license_file: LICENSE-MIT
   summary: Bundle thirdparty licenses for Cargo projects into a single file.
+  description: A rust tool to bundle all third-party licenses into a single file.
+  dev_url: https://github.com/sstadick/cargo-bundle-licenses
+  doc_url: https://github.com/sstadick/cargo-bundle-licenses
+  doc_source_url: https://github.com/sstadick/cargo-bundle-licenses/blob/v{{ version }}/README.md
 
 extra:
   recipe-maintainers:
