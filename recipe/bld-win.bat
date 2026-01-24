@@ -21,8 +21,8 @@ cargo bundle-licenses --format yaml --output CI.THIRDPARTY.yml --previous THIRDP
 :: build
 cargo install --locked --root "%PREFIX%" --path . || goto :error
 
-:: strip debug symbols
-strip "%PREFIX%\bin\cargo-bundle-licenses.exe" || goto :error
+:: strip debug symbols (optional, may not be available on all platforms)
+strip "%PREFIX%\bin\cargo-bundle-licenses.exe" 2>nul || echo "strip not available, skipping"
 
 :: remove extra build file
 del /F /Q "%PREFIX%\.crates.toml"

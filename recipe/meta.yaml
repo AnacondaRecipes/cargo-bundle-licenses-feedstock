@@ -1,6 +1,6 @@
 {% set name = "cargo-bundle-licenses" %}
-{% set version = "0.5.0" %}
-{% set sha256 = "c2c746cb46ed43ed06a34b961a8d71fc86387fd68103d42e34043e80d0fb3a30" %}
+{% set version = "4.2.0" %}
+{% set sha256 = "196d27676dae302d3c91315c1323b790f13b838b6dfd67b2f6c0236a55547765" %}
 
 package:
   name: {{ name }}-suite
@@ -12,8 +12,6 @@ source:
 
 build:
   number: 0
-  ignore_run_exports:
-    - libgit2
   missing_dso_whitelist:
     - $RPATH/ld64.so.1  # [s390x]
 
@@ -30,8 +28,6 @@ outputs:
         - pkg-config
         - make  # [not win]
         - m2-make # [win]
-        - cmake
-        - libgit2
       test:
         commands:
           - cargo-bundle-licenses --help
@@ -43,8 +39,6 @@ outputs:
         - {{ compiler('m2w64_c') }}         # [win]
         - pkg-config                        # [win]
         - m2-make                           # [win]
-        - cmake                             # [win]
-        - libgit2                           # [win]
       test:                                 # [win]
         commands:                           # [win]
           - cargo-bundle-licenses --help    # [win]
