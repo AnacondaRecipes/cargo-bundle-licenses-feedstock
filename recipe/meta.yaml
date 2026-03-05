@@ -21,9 +21,8 @@ outputs:
     script: bld-win.bat  # [win]
     requirements:
       build:
-        - rust_win-64  # [win]
-        - {{ compiler('m2w64_c') }} # [win]
-        - {{ compiler('rust') }}  # [not win]
+        # - {{ compiler('m2w64_c') }} # [win]
+        - {{ compiler('rust') }} 
         - {{ compiler('c') }} # [not win]
         - pkg-config
         - make  # [not win]
@@ -31,17 +30,17 @@ outputs:
       test:
         commands:
           - cargo-bundle-licenses --help
-  - name: {{ name }}-gnu                    # [win]
-    script: bld-win.bat                     # [win]
-    requirements:                           # [win]
-      build:                                # [win]
-        - rust-gnu_win-64                   # [win]
-        - {{ compiler('m2w64_c') }}         # [win]
-        - pkg-config                        # [win]
-        - m2-make                           # [win]
-      test:                                 # [win]
-        commands:                           # [win]
-          - cargo-bundle-licenses --help    # [win]
+  - name: {{ name }}-gnu                    # [win64]
+    script: bld-win.bat                     # [win64]
+    requirements:                           # [win64]
+      build:                                # [win64]
+        - rust-gnu_win-64                   # [win64]
+        - {{ compiler('m2w64_c') }}         # [win64]
+        - pkg-config                        # [win64]
+        - m2-make                           # [win64]
+      test:                                 # [win64]
+        commands:                           # [win64]
+          - cargo-bundle-licenses --help    # [win64]
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
