@@ -24,6 +24,7 @@ outputs:
         - {{ compiler('rust') }}
         - {{ compiler('c') }}
         - {{ stdlib('c') }}
+        - cargo-auditable
         - pkg-config
         - cmake
         - libgit2
@@ -38,6 +39,7 @@ outputs:
         - {{ compiler('rust-gnu') }}        # [win]
         - {{ compiler('c') }}               # [win]
         - {{ compiler('m2w64_c') }}         # [win]
+        - cargo-auditable                   # [win]
         - pkg-config                        # [win]
         - m2-make                           # [win]
         - cmake                             # [win]
