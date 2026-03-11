@@ -17,9 +17,8 @@ build:
 
 outputs:
   - name: {{ name }}
-    script:
-      - build-unix.sh  # [not win]
-      - bld-win.bat    # [win]
+    script: build-unix.sh  # [not win]
+    script: bld-win.bat  # [win]
     requirements:
       build:
         - {{ compiler('rust') }}
