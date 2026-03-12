@@ -1,6 +1,6 @@
 {% set name = "cargo-bundle-licenses" %}
-{% set version = "0.5.0" %}
-{% set sha256 = "c2c746cb46ed43ed06a34b961a8d71fc86387fd68103d42e34043e80d0fb3a30" %}
+{% set version = "4.2.0" %}
+{% set sha256 = "196d27676dae302d3c91315c1323b790f13b838b6dfd67b2f6c0236a55547765" %}
 
 package:
   name: {{ name }}-suite
@@ -14,8 +14,6 @@ build:
   number: 0
   ignore_run_exports:
     - libgit2
-  missing_dso_whitelist:
-    - $RPATH/ld64.so.1  # [s390x]
 
 outputs:
   - name: {{ name }}
@@ -23,31 +21,33 @@ outputs:
     script: bld-win.bat  # [win]
     requirements:
       build:
-        - rust_win-64  # [win]
-        - {{ compiler('m2w64_c') }} # [win]
-        - {{ compiler('rust') }}  # [not win]
-        - {{ compiler('c') }} # [not win]
+        - {{ compiler('rust') }}
+        - {{ compiler('c') }}
+        - {{ stdlib('c') }}
+        - cargo-auditable
         - pkg-config
-        - make  # [not win]
-        - m2-make # [win]
         - cmake
         - libgit2
-      test:
-        commands:
-          - cargo-bundle-licenses --help
+    test:
+      commands:
+        - cargo-bundle-licenses --help
   - name: {{ name }}-gnu                    # [win]
     script: bld-win.bat                     # [win]
     requirements:                           # [win]
       build:                                # [win]
         - rust-gnu_win-64                   # [win]
+        - {{ compiler('rust-gnu') }}        # [win]
+        - {{ compiler('c') }}               # [win]
+        - {{ stdlib('c') }}                 # [win]
         - {{ compiler('m2w64_c') }}         # [win]
+        - cargo-auditable                   # [win]
         - pkg-config                        # [win]
-        - m2-make                           # [win]
+        - msys2-make                        # [win]
         - cmake                             # [win]
         - libgit2                           # [win]
-      test:                                 # [win]
-        commands:                           # [win]
-          - cargo-bundle-licenses --help    # [win]
+    test:                                 # [win]
+      commands:                           # [win]
+        - cargo-bundle-licenses --help    # [win]
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
@@ -58,7 +58,6 @@ about:
   description: A rust tool to bundle all third-party licenses into a single file.
   dev_url: https://github.com/sstadick/cargo-bundle-licenses
   doc_url: https://github.com/sstadick/cargo-bundle-licenses
-  doc_source_url: https://github.com/sstadick/cargo-bundle-licenses/blob/v{{ version }}/README.md
 
 extra:
   recipe-maintainers:
