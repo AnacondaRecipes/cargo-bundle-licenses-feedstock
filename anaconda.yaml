@@ -1,0 +1,7 @@
+anaconda_config_version: 1
+upstream_sources:
+  - github:
+      identifier: sstadick/cargo-bundle-licenses
+    packages:
+      - cargo-bundle-licenses
+      - cargo-bundle-licenses-gnu
