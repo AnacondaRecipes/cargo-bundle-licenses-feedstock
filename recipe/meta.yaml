@@ -11,9 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
-  missing_dso_whitelist:
-    - $RPATH/ld64.so.1  # [s390x]
+  number: 1
 
 outputs:
   - name: {{ name }}
@@ -21,26 +19,34 @@ outputs:
     script: bld-win.bat  # [win]
     requirements:
       build:
-        # - {{ compiler('m2w64_c') }} # [win]
-        - {{ compiler('rust') }} 
-        - {{ compiler('c') }} # [not win]
+        - {{ compiler('rust') }}
+        - {{ compiler('c') }}
+        - {{ stdlib('c') }}
+        - cargo-auditable
         - pkg-config
-        - make  # [not win]
-        - m2-make # [win]
-      test:
-        commands:
-          - cargo-bundle-licenses --help
-  - name: {{ name }}-gnu                    # [win64]
-    script: bld-win.bat                     # [win64]
-    requirements:                           # [win64]
-      build:                                # [win64]
-        - rust-gnu_win-64                   # [win64]
-        - {{ compiler('m2w64_c') }}         # [win64]
-        - pkg-config                        # [win64]
-        - m2-make                           # [win64]
-      test:                                 # [win64]
-        commands:                           # [win64]
-          - cargo-bundle-licenses --help    # [win64]
+    test:
+      commands:
+        - cargo-bundle-licenses --help
+
+  - name: {{ name }}-gnu
+    build:
+      skip: true  # [not win64]
+    script: bld-win.bat
+    requirements:
+      build:
+        - rust-gnu_win-64
+        - {{ compiler('rust-gnu') }}
+        - {{ compiler('c') }}
+        - {{ stdlib('c') }}
+        - {{ compiler('m2w64_c') }}
+        - cargo-auditable
+        - pkg-config
+        - msys2-make
+        - cmake
+        - libgit2
+    test:
+      commands:
+        - cargo-bundle-licenses --help
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
@@ -51,7 +57,6 @@ about:
   description: A rust tool to bundle all third-party licenses into a single file.
   dev_url: https://github.com/sstadick/cargo-bundle-licenses
   doc_url: https://github.com/sstadick/cargo-bundle-licenses
-  doc_source_url: https://github.com/sstadick/cargo-bundle-licenses/blob/v{{ version }}/README.md
 
 extra:
   recipe-maintainers:
