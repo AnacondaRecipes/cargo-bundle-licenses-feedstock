@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - libgit2
 
@@ -26,28 +26,29 @@ outputs:
         - {{ stdlib('c') }}
         - cargo-auditable
         - pkg-config
+    test:
+      commands:
+        - cargo-bundle-licenses --help
+
+  - name: {{ name }}-gnu
+    build:
+      skip: true  # [not win64]
+    script: bld-win.bat
+    requirements:
+      build:
+        - rust-gnu_win-64
+        - {{ compiler('rust-gnu') }}
+        - {{ compiler('c') }}
+        - {{ stdlib('c') }}
+        - {{ compiler('m2w64_c') }}
+        - cargo-auditable
+        - pkg-config
+        - msys2-make
         - cmake
         - libgit2
     test:
       commands:
         - cargo-bundle-licenses --help
-  - name: {{ name }}-gnu                    # [win]
-    script: bld-win.bat                     # [win]
-    requirements:                           # [win]
-      build:                                # [win]
-        - rust-gnu_win-64                   # [win]
-        - {{ compiler('rust-gnu') }}        # [win]
-        - {{ compiler('c') }}               # [win]
-        - {{ stdlib('c') }}                 # [win]
-        - {{ compiler('m2w64_c') }}         # [win]
-        - cargo-auditable                   # [win]
-        - pkg-config                        # [win]
-        - msys2-make                        # [win]
-        - cmake                             # [win]
-        - libgit2                           # [win]
-    test:                                 # [win]
-      commands:                           # [win]
-        - cargo-bundle-licenses --help    # [win]
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
