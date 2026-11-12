@@ -8,4 +8,3 @@ upstream_sources:
       to_pattern: \1
     packages:
       - cargo-bundle-licenses
-      - cargo-bundle-licenses-gnu
