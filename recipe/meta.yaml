@@ -3,7 +3,7 @@
 {% set sha256 = "196d27676dae302d3c91315c1323b790f13b838b6dfd67b2f6c0236a55547765" %}
 
 package:
-  name: {{ name }}-suite
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -12,23 +12,22 @@ source:
 
 build:
   number: 2
+  script: build-unix.sh  # [not win]
+  script: bld-win.bat  # [win]
   ignore_run_exports:
     - libgit2
 
-outputs:
-  - name: {{ name }}
-    script: build-unix.sh  # [not win]
-    script: bld-win.bat  # [win]
-    requirements:
-      build:
-        - {{ compiler('rust') }}
-        - {{ compiler('c') }}
-        - {{ stdlib('c') }}
-        - cargo-auditable
-        - pkg-config
-    test:
-      commands:
-        - cargo-bundle-licenses --help
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+    - cargo-auditable
+    - pkg-config
+
+test:
+  commands:
+    - cargo-bundle-licenses --help
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
