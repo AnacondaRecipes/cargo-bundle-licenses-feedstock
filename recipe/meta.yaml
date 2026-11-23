@@ -1,6 +1,6 @@
 {% set name = "cargo-bundle-licenses" %}
-{% set version = "4.2.0" %}
-{% set sha256 = "196d27676dae302d3c91315c1323b790f13b838b6dfd67b2f6c0236a55547765" %}
+{% set version = "5.0.0" %}
+{% set sha256 = "8d111098198d9e43d606bd13f66b09316bde941a69e1d973921ee741b7a7249a" %}
 
 package:
   name: {{ name }}
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 0
   ignore_run_exports:
     - libgit2
 
@@ -29,9 +29,11 @@ test:
 
 about:
   home: https://github.com/sstadick/cargo-bundle-licenses
-  license: MIT and Apache-2.0
-  license_family: MIT
-  license_file: LICENSE-MIT
+  license: MIT AND Apache-2.0
+  license_family: Other
+  license_file:
+    - LICENSE-MIT
+    - LICENSE-APACHE
   summary: Bundle thirdparty licenses for Cargo projects into a single file.
   description: A rust tool to bundle all third-party licenses into a single file.
   dev_url: https://github.com/sstadick/cargo-bundle-licenses
